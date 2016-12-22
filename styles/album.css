@@ -71,6 +71,10 @@ body.album {
 	height: 28px;
 }
 
+.album-song-button {
+	padding-top: 7px;
+}
+
 .album-song-button:hover {
 	cursor: pointer;
 	color: white;
