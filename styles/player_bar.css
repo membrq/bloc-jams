@@ -19,6 +19,13 @@
 	text-decoration: none;
 }
 
+.player-bar .container {
+	display: table;
+	padding: 0;
+	width: 90%;
+	min-height: 100%;
+}
+
 .player-bar .control-group {
 	display: table-cell;
 	vertical-align: middle;
