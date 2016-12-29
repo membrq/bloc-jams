@@ -13,13 +13,13 @@ var createSongRow = function(songNumber, songName, songLength) {
 		var songNumber = $(this).attr('data-song-number');
 		
 		if (currentlyPlayingSongNumber !== null) {
-			var currentlyPlayingCell = $('.song-item-number[data-song-number="' + currentlyPlayingSongNumber + '"]');
+			var currentlyPlayingCell = getSongNumberCell(number);
 			currentlyPlayingCell.html(currentlyPlayingSongNumber);
 		}
 		
 		if (currentlyPlayingSongNumber !== songNumber) {
 			$(this).html(pausButtonTemplate);
-			currentlyPlayingSongNumber = songNumber;
+			setSong(songNumber);
 			currentSongFromAlbum = currentAlbum.songs[songNumber - 1];
 			updatePlayerBarSong();
 		} else if (currentlyPlayingSongNumber === songNumber) {
@@ -52,6 +52,15 @@ var createSongRow = function(songNumber, songName, songLength) {
 	$row.hover(onHover, offHover);
 	
 	return $row;
+};
+
+var setSong = function(songNumber) {
+	currentlyPlayingSongNumber = songNumber;
+	currentSongFromAlbum = currentAlbum.songs[songNumber - 1];
+};
+
+var getSongNumberCell = function(number)  {
+	return $('.song-item-number[data-song-number="' + number +  '"]');
 };
 
 var setCurrentAlbum = function(album) {
