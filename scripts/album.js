@@ -13,14 +13,14 @@ var createSongRow = function(songNumber, songName, songLength) {
 		var songNumber = parseInt($(this).attr('data-song-number'));
 		
 		if (currentlyPlayingSongNumber !== null) {
-			var currentlyPlayingCell = getSongNumberCell(number);
+			var currentlyPlayingCell = getSongNumberCell(currentlyPlayingSongNumber);
 			currentlyPlayingCell.html(currentlyPlayingSongNumber);
 		}
 		
 		if (currentlyPlayingSongNumber !== songNumber) {
-			$(this).html(pauseButtonTemplate);
 			setSong(songNumber); 
 			currentSoundFile.play();
+			$(this).html(pauseButtonTemplate);
 			currentSongFromAlbum = currentAlbum.songs[songNumber - 1];
 			updatePlayerBarSong();
 		} else if (currentlyPlayingSongNumber === songNumber) {
@@ -32,6 +32,7 @@ var createSongRow = function(songNumber, songName, songLength) {
 				$(this).html(playButtonTemplate);
 				$('.main-controls .play-pause').html(playerBarPlayButton);
 				currentSoundFile.pause();
+			}
 		}
 	}
 	
@@ -55,7 +56,6 @@ var createSongRow = function(songNumber, songName, songLength) {
 	
 	$row.find('.song-item-number').click(clickHandler);
 	$row.hover(onHover, offHover);
-	
 	return $row;
 }
 
@@ -85,7 +85,8 @@ var getSongNumberCell = function(number)  {
 }
 
 var setCurrentAlbum = function(album) {
-	currentAlbum = album;
+	currentAlbum = album
+	
 	var $albumTitle = $('.album-view-title');
 	var $albumArtist = $('.album-view-artist');
 	var $albumReleaseInfo = $('.album-view-release-info');
@@ -101,6 +102,7 @@ var setCurrentAlbum = function(album) {
 	
 	for (var i = 0; i < album.songs.length; i++) {
 		var $newRow = createSongRow(i + 1, album.songs[i].title, album.songs[i].duration);
+		console.log($newRow)
 		$albumSongList.append($newRow);
 	}
 }
